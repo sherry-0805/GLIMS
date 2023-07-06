@@ -4,3 +4,27 @@ This is the source code of "GLIMS: A two-stage gradual learning method for cance
 # Dependencies
 python(version=3.7.9) ; 
 tensorflow (version=1.15.0) ; numpy (version=1.19.1); pandas (version=1.2.4) ; scikit-learn (version=0.24.2) ; scipy (version=1.6.2) ; h5py (version=2.10.0) ; networkx (version=2.5.1) ; mygene (version=3.2.2)
+
+# Guided Tutorial
+Here, we illustrate the usage of the model using BRCA as an example.
+```
+# Construction of data container of cancer
+python ./code/preprocessing_data/build_max_connected_graph.py -c brca
+# -c gbm/brca/luad/pancancer
+
+R CMD BATCH --args ./code/preprocessing_data/brca_preprocessing.R
+# --args gbm_preprocessing.R/brca_preprocessing.R/luad_preprocessing.R/pancancer_preprocessing.R
+
+python ./code/HIM-GCN/data_preparation.py  -c brca
+# -c gbm/brca/luad/pancancer
+
+# Model training
+python ./code/HIM-GCN/train_himgcn_cv.py -cv 3 -e 1500 -d ./code/HIM-GCN/data_container/brca/brca_data_container.h5
+```
+
+The HIM-GCN outputs the likelihood of all input genes being cancer genes. The ```partial_correlation.R``` script is used to calculate the partial correlation coefficients between the cancer gene candidates and AS events. The ```co_regulation_network.R``` script is used to construct a comprehensive cancer-related co-splicing network. Finally, the PageRank algorithm is applied to re-rank the candidates.
+
+
+
+
+
