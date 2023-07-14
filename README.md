@@ -3,7 +3,9 @@ This is the source code of "GLIMS: A two-stage gradual learning method for cance
 
 # Dependencies
 python(version=3.7.9) ; 
-tensorflow (version=1.15.0) ; numpy (version=1.19.1); pandas (version=1.2.4) ; scikit-learn (version=0.24.2) ; scipy (version=1.6.2) ; h5py (version=2.10.0) ; networkx (version=2.5.1) ; mygene (version=3.2.2)
+tensorflow (version=1.15.0) ; numpy (version=1.19.1); pandas (version=1.2.4) ; scikit-learn (version=0.24.2) ; scipy (version=1.6.2) ; h5py (version=2.10.0) ; networkx (version=2.5.1) ; mygene (version=3.2.2); gcn.
+
+Considering the compatibility issues between gcn and tensorFlow, we have provided a gcn library in ```./code/HIM-GCN/GCN```. The original GCN code can be found at 'https://github.com/tkipf/gcn'.
 
 # Guided Tutorial
 Here, we illustrate the usage of the model using BRCA as an example.
@@ -19,10 +21,10 @@ python ./code/HIM-GCN/data_preparation.py  -c brca
 # -c gbm/brca/luad/pancancer
 
 # Model training
-python ./code/HIM-GCN/train_himgcn_cv.py -cv 3 -e 1500 -d ./code/HIM-GCN/data_container/brca/brca_data_container.h5
+python ./code/HIM-GCN/train_himgcn_cv.py -cv 3 -e 1500 -d ./code/HIM-GCN/data_container/brca_test_data.h5
 ```
 
-The HIM-GCN outputs the likelihood of all input genes being cancer genes. The ```partial_correlation.R``` script is used to calculate the partial correlation coefficients between the cancer gene candidates and AS events. The ```co_regulation_network.R``` script is used to construct a comprehensive cancer-related co-splicing network. Finally, the PageRank algorithm is applied to re-rank the candidates.
+```brca_test_data.h5``` is an example input file that contains a subnetwork composed of 378 genes and multi-omics features for each gene, and the HIM-GCN outputs the likelihood of all input genes being cancer genes after training. The ```partial_correlation.R``` script is used to calculate the partial correlation coefficients between the cancer gene candidates and AS events. The ```co_regulation_network.R``` script is used to construct a comprehensive cancer-related co-splicing network. Finally, the PageRank algorithm is applied to re-rank the candidates.
 
 
 
