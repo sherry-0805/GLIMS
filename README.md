@@ -8,6 +8,8 @@ tensorflow (version=1.15.0) ; numpy (version=1.19.1); pandas (version=1.2.4) ; s
 Considering the compatibility issues between gcn and tensorFlow, we have provided a gcn library in ```./code/HIM-GCN/GCN```. The original GCN code can be found at 'https://github.com/tkipf/gcn'.
 
 # Guided Tutorial
+Considering the complete dataset is rather large, you can download the full files from "[here]". These files include not only all the code but also the necessary ```.h5``` file for cancer gene prediction, containing the PPI network, multi-omics gene features, and the required training labels.
+
 Here, we illustrate the usage of the model using BRCA as an example.
 ```
 # Construction of data container of cancer
@@ -27,6 +29,6 @@ python ./code/HIM-GCN/train_himgcn_cv.py -cv 3 -e 1500 -d ./code/HIM-GCN/data_co
 ```brca_test_data.h5``` is an example input file that contains a subnetwork composed of 378 genes and multi-omics features for each gene, and the HIM-GCN outputs the likelihood of all input genes being cancer genes after training. The ```partial_correlation.R``` script is used to calculate the partial correlation coefficients between the cancer gene candidates and AS events. The ```co_regulation_network.R``` script is used to construct a comprehensive cancer-related co-splicing network. Finally, the PageRank algorithm is applied to re-rank the candidates.
 
 
-
+[here]: https://zenodo.org/records/10202473?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjcxNTJmNzA2LTZmNDItNGExNS05YzY3LWIwYzc3YTU5NzZkZiIsImRhdGEiOnt9LCJyYW5kb20iOiIwNjMwNTcxNjFkYTIxOGJlYjkyYzI4YjE5YzBmMGFlNyJ9.bbmH69dNa_c8g4jUKQC_4AeQnZ75eRLdvRIIzhMS6a70j8dbooJ7ghzSqq27-j0s7-2hB3X21-3XBwywXV5E-A
 
 
